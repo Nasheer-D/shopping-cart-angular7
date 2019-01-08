@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.image-in-card {
+    max-width: 350px;
+    max-height: 350px;
+    position: relative;
+    left: 11%;
+}
