@@ -99,7 +99,7 @@ export function rootReducer(state: IAppState, action): IAppState {
         case SEARCH_IN_ITEMS:
             console.log("dispatched SEARCH_IN_ITEMS, action::", action, "state::", state);
             var updatedList = []
-            updatedList = state.items
+            updatedList = INITIAL_STATE.items
             var indexArray = []
 
             if (action.searchVal.length == 0) {
