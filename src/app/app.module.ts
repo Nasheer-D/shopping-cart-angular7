@@ -14,6 +14,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { ItemsCartComponent } from './items-cart/items-cart.component';
 import {MatTableModule} from '@angular/material/table';
+import { NgRedux, NgReduxModule } from '@angular-redux/store';
+import { IAppState, rootReducer, INITIAL_STATE } from './store';
+import { FormsModule } from '@angular/forms'; 
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import {MatTableModule} from '@angular/material/table';
   ],
   imports: [
     BrowserModule,
+    NgReduxModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
@@ -31,9 +35,15 @@ import {MatTableModule} from '@angular/material/table';
     AppRoutingModule,
     MatDividerModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  //initialize store
+  constructor (ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  }
+ }

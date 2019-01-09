@@ -7,6 +7,14 @@ import { Location } from '@angular/common';
 
 import { ItemsService }  from '../items.service';
 
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from '../store';
+import { GET_ITEM } from '../actions';
+
+import { Observable, of } from 'rxjs';
+
+import { ADD_TO_CART } from '../actions';
+
 @Component({
   selector: 'app-item-detail',
   templateUrl: './item-detail.component.html',
@@ -16,25 +24,34 @@ import { ItemsService }  from '../items.service';
 // @Input() item: Item;
 
 export class ItemDetailComponent implements OnInit {
+  
+  @select() selectedItem: Observable<IAppState>;
 
   constructor(
     private route: ActivatedRoute,
     private itemsService: ItemsService,
-    private location: Location
+    private location: Location,
+    private ngRedux: NgRedux<IAppState>
   ) { }
   
-  item: Item;
+  // item: Item;
 
   getItem(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log("id in component", id);
-    this.itemsService.getItem(id)
-      .subscribe(item => this.item = item)
+    // console.log("id in component", id);
+    // this.itemsService.getItem(id)
+    //   .subscribe(item => this.item = item)
+
+    // use reducer to get Item
+    this.ngRedux.dispatch({type: GET_ITEM, id: id});
+    console.log("selectedItem object after dispatch", this.selectedItem);
   }
   
   addToCart() {
-    console.log("addToCart click item is", this.item);
-    this.itemsService.addToCart(this.item)
+    console.log("addToCart click item is", this.selectedItem);
+    // this.itemsService.addToCart(this.selectedItem);
+    this.ngRedux.dispatch({type: ADD_TO_CART});
+    console.log("selectedItem in addToCart function()");
   }
 
   goBack(): void {

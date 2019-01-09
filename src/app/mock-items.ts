@@ -20,5 +20,4 @@ export const Items: Item[] = [
         prize: "$2500",
         count: 0
     }
-
 ]
