@@ -35,10 +35,13 @@ export class ItemsCartComponent implements OnInit {
   
     // use reducer to get Item
     this.ngRedux.dispatch({type: GET_CART_ITEMS});
-
+    
+    console.log("this.ngRedux.getState()", this.ngRedux.getState());
   }
   
   displayedColumns: string[] = ['id', 'title', 'prize', 'quantity'];
+
+  cart = this.ngRedux.getState().cartItems;
 
   ngOnInit() {
     this.getCartList();

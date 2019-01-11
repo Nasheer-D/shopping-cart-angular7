@@ -16,14 +16,17 @@ import { ItemsCartComponent } from './items-cart/items-cart.component';
 import {MatTableModule} from '@angular/material/table';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { IfprivilegedDirective } from './ifpriviliged.directive'; 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingItemsComponent,
     ItemDetailComponent,
-    ItemsCartComponent
+    ItemsCartComponent,
+    IfprivilegedDirective
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatListModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

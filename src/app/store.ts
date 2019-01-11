@@ -6,13 +6,22 @@ import { GET_ITEM } from './actions';
 
 import { GET_CART_ITEMS } from './actions';
 
-import { SEARCH_IN_ITEMS } from './actions'
+import { SEARCH_IN_ITEMS } from './actions';
+
+import { UPDATE_USER_INFO } from './actions';
+
+import { GET_USER_INFO } from './actions';
+
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from './store';
+import { Config } from './config/config.service'
 
 export interface IAppState {
     items: Item[];
     selectedItem: Item;
     cartItems: Item[];
     searchVal: string;
+    userInfo: Config[];
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -39,7 +48,8 @@ export const INITIAL_STATE: IAppState = {
     ],
     selectedItem: new Item,
     cartItems: [],
-    searchVal: ""
+    searchVal: "",
+    userInfo: []
 }
 
 var idArray = [];
@@ -144,8 +154,26 @@ export function rootReducer(state: IAppState, action): IAppState {
 
             return Object.assign({}, state, { items: updatedList })
 
-        default:
+            // return Object.assign({}, state, {
+            //     shoppingCartItems: [
+            //       ...state.shoppingCartItems,
+            //       action.item
+            //     ]
+            //   })
+        
+        case UPDATE_USER_INFO:
+            console.log("dispatch call UPDATE_USER_INFO case match, state::", state, "action::", action);
+            // console.log("Object.assign({}, state, {userInfo: action.userInfo})", Object.assign({}, state, {userInfo: action.userInfo}));
+            var userInfo = action.userInfo
+            return Object.assign({}, state, {
+                userInfo: action.userInfo
+            });
 
+        case GET_USER_INFO:
+            console.log("dispatch call GET_USER_INFO case match, state::", state, "action::", action);
+            return state;
+
+        default:
             return state;
     }
 }

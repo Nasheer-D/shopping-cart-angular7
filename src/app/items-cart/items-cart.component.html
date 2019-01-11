@@ -33,3 +33,10 @@
 <br>
 <a routerLink="/home"><button mat-raised-button color="primary">Add More</button></a>
 
+<!-- <p *appIfprivilege="cart">show this information only if user is privileged</p> -->
+
+<p [appIfprivileged]="cart" class="unless a">
+  show this information only if user is privileged
+</p>
+
+

@@ -35,6 +35,8 @@ export class ItemDetailComponent implements OnInit {
   ) { }
   
   // item: Item;
+  
+  cart: Array<any>
 
   getItem(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -45,13 +47,15 @@ export class ItemDetailComponent implements OnInit {
     // use reducer to get Item
     this.ngRedux.dispatch({type: GET_ITEM, id: id});
     console.log("selectedItem object after dispatch", this.selectedItem);
+
   }
   
   addToCart() {
     console.log("addToCart click item is", this.selectedItem);
     // this.itemsService.addToCart(this.selectedItem);
     this.ngRedux.dispatch({type: ADD_TO_CART});
-    console.log("selectedItem in addToCart function()");
+    console.log("this.ngRedux.getState().cartItems", this.ngRedux.getState().cartItems);
+    this.cart = this.ngRedux.getState().cartItems;
   }
 
   goBack(): void {

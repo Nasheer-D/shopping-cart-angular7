@@ -16,3 +16,5 @@
     <button mat-raised-button color="primary" (click)="goBack()">go back</button>
   </mat-card-actions>
 </mat-card>
+
+<p [appIfprivileged]="cart">show this information only if user is privileged</p>
